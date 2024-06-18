@@ -147,7 +147,7 @@ export function onKeystroke(
           //
           if (
             !shortcut &&
-            /^[a-zA-Z][a-zA-Z0-9]+?([_\^][a-zA-Z0-9\*\+\-]+?)?$/.test(candidate)
+            /^[a-zA-Z][a-zA-Z0-9.]+?([_\^][a-zA-Z0-9\*\+\-]+?)?$/.test(candidate)
           )
             shortcut = mathfield.options.onInlineShortcut(mathfield, candidate);
 
@@ -597,17 +597,17 @@ function insertMathModeChar(mathfield: _Mathfield, c: string): void {
     | undefined
     | SelectorPrivate
     | [SelectorPrivate, ...unknown[]] = (
-    {
-      '^': 'moveToSuperscript',
-      '_': 'moveToSubscript',
-      ' ': mathfield.options.mathModeSpace
-        ? (['insert', mathfield.options.mathModeSpace] as [
+      {
+        '^': 'moveToSuperscript',
+        '_': 'moveToSubscript',
+        ' ': mathfield.options.mathModeSpace
+          ? (['insert', mathfield.options.mathModeSpace] as [
             SelectorPrivate,
             ...unknown[],
           ])
-        : 'moveAfterParent',
-    } as const
-  )[c];
+          : 'moveAfterParent',
+      } as const
+    )[c];
 
   if (selector) {
     mathfield.executeCommand(selector);
